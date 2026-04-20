@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Автовыдача 24/7 | Гайд по снижению пинга</title>
-    <meta name="description" content="Полный гайд по снижению пинга в играх. Защищённый контент.">
+    <title>Гайд по снижению пинга | Полное руководство</title>
+    <meta name="description" content="Полный гайд по снижению пинга в играх. 10+ способов, настройка Windows, сетевой карты, реестра, роутера и софта.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -15,17 +15,16 @@
             box-sizing: border-box;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
         }
 
         body {
             background: linear-gradient(135deg, #0a0e1a 0%, #0c1120 100%);
             font-family: 'Inter', sans-serif;
             color: #eef2ff;
-            line-height: 1.5;
-            position: relative;
+            line-height: 1.6;
         }
 
+        /* Анти-скриншот overlay */
         body::before {
             content: "";
             position: fixed;
@@ -35,7 +34,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 9999;
-            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, rgba(0,255,255,0.03) 1px, transparent 1px, transparent 3px);
+            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.02) 0px, rgba(0,255,255,0.02) 1px, transparent 1px, transparent 2px);
         }
 
         .container {
@@ -46,6 +45,7 @@
             z-index: 1;
         }
 
+        /* Шапка */
         .header-badge {
             display: flex;
             justify-content: space-between;
@@ -106,6 +106,43 @@
             padding-left: 1.2rem;
         }
 
+        /* Оглавление */
+        .toc {
+            background: rgba(12, 18, 32, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            margin-bottom: 1rem;
+            color: #0ff;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .toc a {
+            color: #eef2ff;
+            text-decoration: none;
+            padding: 0.3rem 0;
+            display: block;
+            border-left: 2px solid rgba(0,255,255,0.3);
+            padding-left: 0.8rem;
+            transition: 0.2s;
+        }
+
+        .toc a:hover {
+            border-left-color: #0ff;
+            color: #0ff;
+        }
+
+        /* Карточки с гайдами */
         .card {
             background: rgba(12, 18, 32, 0.7);
             backdrop-filter: blur(10px);
@@ -113,6 +150,12 @@
             border: 1px solid rgba(0, 255, 255, 0.15);
             padding: 1.8rem;
             margin-bottom: 1.8rem;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 255, 255, 0.4);
+            background: rgba(16, 22, 40, 0.8);
         }
 
         h2 {
@@ -122,40 +165,34 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .price-box {
-            background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 100%);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: 800;
             color: #0ff;
-            margin: 0.5rem 0;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #aaffdd;
         }
 
-        .feature {
-            background: rgba(0, 255, 255, 0.05);
+        .code-block {
+            background: #0a0e16;
             border-radius: 1rem;
             padding: 1rem 1.2rem;
-            border-left: 3px solid #0ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid #2a2f3a;
+            margin: 1rem 0;
+            color: #b9ffcf;
         }
 
-        .feature strong {
-            color: #0ff;
+        .tip {
+            background: rgba(0, 255, 255, 0.08);
+            border-left: 4px solid #0ff;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
         }
 
         .warning {
@@ -163,7 +200,29 @@
             border-left: 4px solid #ff5555;
             padding: 1rem 1.5rem;
             border-radius: 1rem;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
+        }
+
+        .success {
+            background: rgba(60, 186, 84, 0.1);
+            border-left: 4px solid #3cba54;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .setting-item {
+            background: #0f1219;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #262c36;
         }
 
         .list {
@@ -172,7 +231,7 @@
         }
 
         .list li {
-            margin: 0.6rem 0;
+            margin: 0.5rem 0;
         }
 
         hr {
@@ -205,244 +264,310 @@
             border: 1px solid #ffaa00;
             opacity: 0;
             transition: opacity 0.2s;
-            font-weight: 600;
         }
 
         @media (max-width: 680px) {
             h1 { font-size: 2rem; }
-            .price { font-size: 1.5rem; }
+            h2 { font-size: 1.4rem; }
             .card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-badge">
-            <div class="auto-badge">
-                <span class="live-dot"></span> АВТОВЫДАЧА 24/7
-            </div>
-            <div style="font-size: 0.85rem; color: #6c7a9e;">⚡ моментально после оплаты</div>
+<div class="container">
+    <!-- Шапка -->
+    <div class="header-badge">
+        <div class="auto-badge">
+            <span class="live-dot"></span> АВТОВЫДАЧА 24/7
         </div>
+        <div style="font-size: 0.85rem; color: #6c7a9e;">⚡ Полное руководство внутри</div>
+    </div>
 
-        <h1>🕒 Снижение ПИНГА<br>Полный гайд</h1>
-        <div class="subtitle">
-            🚀 Оптимизация Windows, сети и реестра для идеального пинга в играх
-        </div>
+    <h1>📉 Как снизить пинг<br>Полный гайд 2025</h1>
+    <div class="subtitle">
+        🔥 10+ рабочих способов от базовых настроек до профессиональной оптимизации
+    </div>
 
-        <div class="price-box">
-            <div style="font-size: 1.2rem;">⭐️ ПОСЛЕ ОПЛАТЫ ВЫ ПОЛУЧИТЕ ⭐️</div>
-            <div class="price">📥 ПОДРОБНОЕ РУКОВОДСТВО</div>
-            <div style="margin: 1rem 0;">📖 ГАЙД + ВИЗУАЛЬНЫЕ ПОЯСНЕНИЯ</div>
-            <div style="margin-top: 0.8rem; font-size: 0.85rem; color: #0ff;">🕒 Автоматическая выдача 24/7</div>
-        </div>
-
-        <div class="card">
-            <h2><span>📦</span> Внутри руководства:</h2>
-            <div class="features-grid">
-                <div class="feature">🛠️ <strong>Комплексная оптимизация</strong><br>от провайдера до реестра</div>
-                <div class="feature">📉 <strong>Снижение ПИНГА</strong><br>стабилизация соединения</div>
-                <div class="feature">⚙️ <strong>Настройка Windows</strong><br>QoS, телеметрия, резервирование</div>
-                <div class="feature">💾 <strong>Leatrix Latency Fix</strong><br>и утилиты приоритета</div>
-                <div class="feature">📥 <strong>Драйверы сетевой карты</strong><br>правильное обновление</div>
-                <div class="feature">🖼️ <strong>Визуальные пояснения</strong><br>картинки к каждому шагу</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><span>🤔</span> Почему выбирают нас:</h2>
-            <div class="features-grid">
-                <div class="feature">🛰️ <strong>АКТУАЛЬНЫЙ ТОВАР</strong></div>
-                <div class="feature">⏱️ <strong>ДОСТАВКА 24/7</strong><br>автовыдача</div>
-                <div class="feature">💰 <strong>ЛУЧШАЯ ЦЕНА</strong></div>
-                <div class="feature">🤝 <strong>УВАЖИТЕЛЬНОЕ ОБЩЕНИЕ</strong></div>
-                <div class="feature">🆘 <strong>ПОМОЩЬ ПРИ ПРОБЛЕМАХ</strong></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><span>📖</span> Что вы получите:</h2>
-            <ul class="list">
-                <li>✅ Настройка параметров сетевой карты</li>
-                <li>✅ Скрипты и правки реестра</li>
-                <li>✅ Отключение телеметрии и обновлений Windows</li>
-                <li>✅ Настройка QoS и удаление резервирования</li>
-                <li>✅ Программы мониторинга пинга</li>
-                <li>✅ Рекомендации по DNS (Cloudflare, Google)</li>
-                <li>✅ Инструкция по Game VPN (ExitLag, WTFast)</li>
-            </ul>
-            <div class="warning">
-                ⚠️ <strong>ПЕРЕПРОДАЖА ЗАПРЕЩЕНА</strong> — только для личного использования
-            </div>
-        </div>
-
-        <hr>
-        <div class="footer">
-            🕒 <strong>АВТОВЫДАЧА 24/7</strong> — моментальная ссылка после оплаты<br>
-            💎 Поддержка в течение 12 часов
+    <!-- Оглавление -->
+    <div class="toc">
+        <h3>📖 Содержание гайда:</h3>
+        <div class="toc-grid">
+            <a href="#way1">1. Провод вместо Wi-Fi</a>
+            <a href="#way2">2. Перезагрузка роутера</a>
+            <a href="#way3">3. Закрытие фоновых программ</a>
+            <a href="#way4">4. Настройка DNS</a>
+            <a href="#way5">5. Отключение QoS</a>
+            <a href="#way6">6. Leatrix Latency Fix</a>
+            <a href="#way7">7. Настройка сетевой карты</a>
+            <a href="#way8">8. Отключение энергосбережения</a>
+            <a href="#way9">9. Реестр и TCP оптимизация</a>
+            <a href="#way10">10. Game VPN (ExitLag/WTFast)</a>
         </div>
     </div>
 
-    <div id="screenshotWarning" class="screenshot-warning">🔒 Win+PrintScreen и другие комбинации заблокированы</div>
+    <!-- СПОСОБ 1 -->
+    <div class="card" id="way1">
+        <h2>🔌 1. Проводное подключение вместо Wi-Fi</h2>
+        <p>Wi-Fi нестабилен по своей природе из-за помех и перегрузки эфира. Даже самый дорогой роутер не даст такой стабильности, как обычный кабель.</p>
+        <div class="tip">
+            💡 <strong>Результат:</strong> Снижение пинга на 10-30 мс, исчезновение скачков и потери пакетов.
+        </div>
+        <div class="code-block">
+            🔌 Используй кабель категории Cat5e или Cat6
+            📏 Максимальная длина без потерь — до 100 метров
+        </div>
+    </div>
 
-    <script>
-        // ========== ПОЛНАЯ БЛОКИРОВКА ВСЕХ ВАРИАНТОВ СКРИНШОТОВ ==========
+    <!-- СПОСОБ 2 -->
+    <div class="card" id="way2">
+        <h2>🔄 2. Перезагрузка роутера и оборудования</h2>
+        <p>Роутеры имеют ограниченную память и со временем "забиваются". Регулярная перезагрузка очищает кэш маршрутизации.</p>
+        <div class="code-block">
+            ⚡ Отключи роутер и модем от розетки на 30-60 секунд
+            ⚡ Включи сначала модем (дождись всех индикаторов)
+            ⚡ Затем включи роутер
+        </div>
+        <div class="tip">💡 Делай это раз в неделю для стабильной работы.</div>
+    </div>
 
-        function showScreenshotWarning() {
-            const warning = document.getElementById('screenshotWarning');
-            if (warning) {
-                warning.style.opacity = '1';
-                setTimeout(() => {
-                    warning.style.opacity = '0';
-                }, 2000);
-            }
-            if (navigator.vibrate) navigator.vibrate(200);
-            
-            // Очистка буфера обмена
-            try {
-                navigator.clipboard.writeText('').catch(() => {});
-            } catch(e) {}
+    <!-- СПОСОБ 3 -->
+    <div class="card" id="way3">
+        <h2>📱 3. Закрой фоновые приложения и загрузки</h2>
+        <p>Торренты, облачные сервисы (Google Drive, Dropbox), обновления Steam и Windows создают агрессивную нагрузку на канал.</p>
+        <div class="code-block">
+            🔍 Открой Диспетчер задач (Ctrl+Shift+Esc) → вкладка "Сеть"
+            ❌ Закрой всё, что потребляет трафик
+            ⚙️ Отключи автоматические обновления в Windows Update
+        </div>
+    </div>
+
+    <!-- СПОСОБ 4 -->
+    <div class="card" id="way4">
+        <h2>🌐 4. Настройка DNS-серверов</h2>
+        <p>Медленные DNS провайдера увеличивают задержку при подключении к игровым серверам.</p>
+        <div class="settings-grid">
+            <div class="setting-item"><strong>Google DNS:</strong><br>8.8.8.8<br>8.8.4.4</div>
+            <div class="setting-item"><strong>Cloudflare DNS:</strong><br>1.1.1.1<br>1.0.0.1</div>
+            <div class="setting-item"><strong>OpenDNS:</strong><br>208.67.222.222<br>208.67.220.220</div>
+        </div>
+        <div class="code-block">
+            📍 Как поменять: Панель управления → Сеть и интернет → Центр управления сетями → Изменить параметры адаптера → Свойства IPv4 → Указать DNS вручную
+        </div>
+    </div>
+
+    <!-- СПОСОБ 5 -->
+    <div class="card" id="way5">
+        <h2>⚙️ 5. Отключение QoS (резервирования канала)</h2>
+        <p>Windows по умолчанию резервирует 20% пропускной способности для своих нужд. Это можно отключить.</p>
+        <div class="code-block">
+            1. Нажми Win+R, введи gpedit.msc (не работает в Windows Home)
+            2. Конфигурация компьютера → Административные шаблоны → Сеть → Планировщик пакетов QoS
+            3. Включи "Ограничить резервируемую пропускную способность"
+            4. Установи значение 0%
+        </div>
+        <div class="tip">💡 Для Windows Home используй правки реестра (см. способ 9)</div>
+    </div>
+
+    <!-- СПОСОБ 6 -->
+    <div class="card" id="way6">
+        <h2>⚡ 6. Leatrix Latency Fix</h2>
+        <p>Бесплатная утилита, которая оптимизирует параметры TCP/IP и снижает задержку в онлайн-играх.</p>
+        <div class="code-block">
+            📥 Скачай Leatrix Latency Fix (бесплатно)
+            ▶️ Запусти от имени администратора
+            🔘 Нажми "Install"
+            🔄 Перезагрузи компьютер
+        </div>
+        <div class="success">✅ Результат: снижение пинга на 5-15 мс в большинстве игр.</div>
+    </div>
+
+    <!-- СПОСОБ 7 -->
+    <div class="card" id="way7">
+        <h2>🖥️ 7. Настройка параметров сетевой карты</h2>
+        <p>В свойствах сетевой карты есть параметры, которые могут увеличивать задержку.</p>
+        <div class="code-block">
+            📍 Как найти: Диспетчер устройств → Сетевые адаптеры → твоя карта → Свойства → Дополнительно
+        </div>
+        <div class="settings-grid">
+            <div class="setting-item"><strong>Large Send Offload (LSO)</strong><br>→ <span style="color:#0ff;">ОТКЛЮЧИТЬ</span></div>
+            <div class="setting-item"><strong>IPv4 Checksum Offload</strong><br>→ <span style="color:#0ff;">ОТКЛЮЧИТЬ</span></div>
+            <div class="setting-item"><strong>TCP Checksum Offload</strong><br>→ <span style="color:#0ff;">ОТКЛЮЧИТЬ</span></div>
+            <div class="setting-item"><strong>Speed & Duplex</strong><br>→ <span style="color:#0ff;">1.0 Gbps Full Duplex</span></div>
+        </div>
+        <div class="tip">💡 Отключение оффлоада заставляет процессор обрабатывать пакеты быстрее, снижая задержку.</div>
+    </div>
+
+    <!-- СПОСОБ 8 -->
+    <div class="card" id="way8">
+        <h2>🔋 8. Отключение энергосбережения на сетевой карте</h2>
+        <p>Windows может отключать питание адаптера для экономии энергии, что вызывает "засыпание" связи и скачки пинга.</p>
+        <div class="code-block">
+            📍 Диспетчер устройств → Сетевые адаптеры → твоя карта → Свойства → Управление электропитанием
+            ❌ Сними галочку "Разрешить отключение этого устройства для экономии энергии"
+        </div>
+    </div>
+
+    <!-- СПОСОБ 9 -->
+    <div class="card" id="way9">
+        <h2>📝 9. Оптимизация реестра и TCP параметров</h2>
+        <p>Ручная настройка реестра Windows для максимальной производительности сети.</p>
+        <div class="code-block">
+            🔧 Открой Regedit (Win+R → regedit)
+            📁 Перейди в: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
+            🆕 Создай DWORD (32 бита) с именем "TcpAckFrequency" → значение 1
+            🆕 Создай DWORD "TCPNoDelay" → значение 1
+            🔄 Перезагрузи компьютер
+        </div>
+        <div class="warning">⚠️ Будь осторожен при редактировании реестра. Неправильные изменения могут нарушить работу системы.</div>
+    </div>
+
+    <!-- СПОСОБ 10 -->
+    <div class="card" id="way10">
+        <h2>🛡️ 10. Game VPN (ExitLag, WTFast, GearUP Booster)</h2>
+        <p>Иногда проблема в маршруте трафика вашего провайдера до серверов игры. Game VPN прокладывают маршрут в обход перегруженных узлов.</p>
+        <div class="settings-grid">
+            <div class="setting-item"><strong>ExitLag</strong><br>Бесплатно 3 дня<br>от $4/мес</div>
+            <div class="setting-item"><strong>WTFast</strong><br>Бесплатно 14 дней<br>от $5/мес</div>
+            <div class="setting-item"><strong>GearUP Booster</strong><br>Бесплатно 7 дней<br>от $3/мес</div>
+        </div>
+        <div class="tip">💡 Попробуй бесплатные версии — если пинг снизится, проблема в маршруте провайдера.</div>
+    </div>
+
+    <!-- БОНУС: Дополнительные советы -->
+    <div class="card">
+        <h2>🎁 Бонус: Дополнительные советы</h2>
+        <ul class="list">
+            <li>✅ <strong>Смени регион сервера</strong> — иногда даже соседний сервер даёт лучший пинг</li>
+            <li>✅ <strong>Обнови драйверы сетевой карты</strong> — с официального сайта производителя</li>
+            <li>✅ <strong>Отключи IPv6</strong> — в свойствах сетевого подключения сними галочку с IPv6</li>
+            <li>✅ <strong>Проверь перегрев роутера</strong> — горячий роутер троттлит и теряет пакеты</li>
+            <li>✅ <strong>Используй PingPlotter</strong> — утилита для диагностики потери пакетов</li>
+        </ul>
+    </div>
+
+    <!-- Финальная проверка -->
+    <div class="card">
+        <h2>📊 Как проверить результат?</h2>
+        <div class="code-block">
+            🌐 speedtest.net — общий тест скорости и пинга
+            🎮 В игре — включи отображение FPS и пинга (обычно Ctrl+Shift+F или в настройках)
+            📊 PingPlotter — тест потери пакетов на каждом узле маршрута
+        </div>
+        <div class="success">
+            ✅ <strong>Нормальный пинг для игр:</strong><br>
+            • Менее 20 мс — отлично<br>
+            • 20-50 мс — хорошо<br>
+            • 50-100 мс — терпимо<br>
+            • Более 100 мс — нужно оптимизировать
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="footer">
+        🕒 <strong>АВТОВЫДАЧА 24/7</strong> — полный гайд у тебя уже на экране<br>
+        💎 Сохрани эту страницу, чтобы не потерять доступ к руководству<br>
+        🔒 Копирование и скриншоты запрещены
+    </div>
+</div>
+
+<div id="screenshotWarning" class="screenshot-warning">🔒 Скриншоты и копирование запрещены</div>
+
+<script>
+    // ========== ЗАЩИТА ОТ СКРИНШОТОВ ==========
+
+    function showWarning() {
+        const el = document.getElementById('screenshotWarning');
+        if (el) {
+            el.style.opacity = '1';
+            setTimeout(() => el.style.opacity = '0', 2000);
         }
+        try { navigator.clipboard.writeText(''); } catch(e) {}
+    }
 
-        window.addEventListener('keydown', function(e) {
-            // === ВАРИАНТЫ PRINTSCREEN ===
-            
-            // Win + PrintScreen (СОХРАНЯЕТ СКРИНШОТ В ПАПКУ!)
-            if (e.metaKey && e.key === 'PrintScreen') {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Win + Shift + S (Фрагмент экрана Windows 10/11)
-            if (e.metaKey && e.shiftKey && (e.key === 'S' || e.key === 's')) {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl + PrintScreen
-            if (e.ctrlKey && e.key === 'PrintScreen') {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Alt + PrintScreen
-            if (e.altKey && e.key === 'PrintScreen') {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl + Alt + PrintScreen
-            if (e.ctrlKey && e.altKey && e.key === 'PrintScreen') {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Обычный PrintScreen
-            if (e.key === 'PrintScreen') {
-                e.preventDefault();
-                e.stopPropagation();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // === ЗАПИСЬ ЭКРАНА ===
-            
-            // Win + G (игровая панель)
-            if (e.metaKey && (e.key === 'g' || e.key === 'G')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Win + Alt + R (запись экрана)
-            if (e.metaKey && e.altKey && (e.key === 'r' || e.key === 'R')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // === ИНСТРУМЕНТЫ РАЗРАБОТЧИКА ===
-            
-            if (e.key === 'F12') {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl+U (исходный код)
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl+P (печать)
-            if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-            
-            // Ctrl+S (сохранение)
-            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
-                e.preventDefault();
-                showScreenshotWarning();
-                return false;
-            }
-        });
-
-        // Блокировка контекстного меню
-        document.addEventListener('contextmenu', function(e) {
+    // Блокировка всех комбинаций скриншотов
+    window.addEventListener('keydown', function(e) {
+        // Win + PrintScreen
+        if (e.metaKey && e.key === 'PrintScreen') {
             e.preventDefault();
-            showScreenshotWarning();
+            showWarning();
             return false;
-        });
-
-        // Блокировка копирования
-        document.addEventListener('copy', function(e) {
-            e.preventDefault();
-            showScreenshotWarning();
-            return false;
-        });
-
-        document.addEventListener('cut', function(e) {
-            e.preventDefault();
-            showScreenshotWarning();
-            return false;
-        });
-
-        // Блокировка выделения
-        document.addEventListener('selectstart', function(e) {
-            e.preventDefault();
-            return false;
-        });
-
-        // Защита от iframe
-        if (window.top !== window.self) {
-            window.top.location = window.self.location;
         }
+        // Win + Shift + S
+        if (e.metaKey && e.shiftKey && e.key === 'S') {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // PrintScreen
+        if (e.key === 'PrintScreen') {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Alt + PrintScreen
+        if (e.altKey && e.key === 'PrintScreen') {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Ctrl + PrintScreen
+        if (e.ctrlKey && e.key === 'PrintScreen') {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // F12 (DevTools)
+        if (e.key === 'F12') {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+        if (e.ctrlKey && e.shiftKey && ['I','J','C','i','j','c'].includes(e.key)) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Ctrl+U
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Ctrl+P
+        if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Ctrl+S
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+        // Win + G (игровая панель)
+        if (e.metaKey && (e.key === 'G' || e.key === 'g')) {
+            e.preventDefault();
+            showWarning();
+            return false;
+        }
+    });
 
-        // Очистка консоли
-        setInterval(() => console.clear(), 1000);
-        
-        console.log('%c🔒 Контент защищён. Win+PrintScreen и другие комбинации заблокированы.', 'color: #0ff; font-size: 14px;');
-    </script>
+    // Блокировка контекстного меню
+    document.addEventListener('contextmenu', (e) => { e.preventDefault(); showWarning(); return false; });
+    // Блокировка копирования
+    document.addEventListener('copy', (e) => { e.preventDefault(); showWarning(); return false; });
+    document.addEventListener('cut', (e) => { e.preventDefault(); showWarning(); return false; });
+    // Блокировка выделения
+    document.addEventListener('selectstart', (e) => { e.preventDefault(); return false; });
+
+    // Защита от iframe
+    if (window.top !== window.self) window.top.location = window.self.location;
+
+    console.log('%c🔒 Гайд защищён от копирования и скриншотов', 'color: #0ff; font-size: 14px;');
+</script>
 </body>
 </html>

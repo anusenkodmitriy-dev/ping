@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Гайд по снижению пинга | Полное руководство</title>
     <meta name="description" content="Полный гайд по снижению пинга в играх. 10+ способов, настройка Windows, сетевой карты, реестра, роутера и софта.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,7 +16,7 @@
 
         body {
             background: linear-gradient(135deg, #0a0e1a 0%, #0c1120 100%);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
             color: #eef2ff;
             line-height: 1.6;
         }
@@ -119,6 +116,7 @@
         .toc h3 {
             margin-bottom: 1rem;
             color: #0ff;
+            font-size: 1.3rem;
         }
 
         .toc-grid {
@@ -142,7 +140,7 @@
             color: #0ff;
         }
 
-        /* Карточки с гайдами */
+        /* Карточки */
         .card {
             background: rgba(12, 18, 32, 0.7);
             backdrop-filter: blur(10px);
@@ -161,17 +159,14 @@
         h2 {
             font-size: 1.7rem;
             font-weight: 700;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin-bottom: 1rem;
             color: #0ff;
         }
 
         h3 {
             font-size: 1.3rem;
             font-weight: 600;
-            margin: 1.5rem 0 0.8rem 0;
+            margin: 1.2rem 0 0.8rem 0;
             color: #aaffdd;
         }
 
@@ -179,12 +174,14 @@
             background: #0a0e16;
             border-radius: 1rem;
             padding: 1rem 1.2rem;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Consolas', monospace;
             font-size: 0.85rem;
             overflow-x: auto;
             border: 1px solid #2a2f3a;
             margin: 1rem 0;
             color: #b9ffcf;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .tip {
@@ -302,7 +299,7 @@
             <a href="#way7">7. Настройка сетевой карты</a>
             <a href="#way8">8. Отключение энергосбережения</a>
             <a href="#way9">9. Реестр и TCP оптимизация</a>
-            <a href="#way10">10. Game VPN (ExitLag/WTFast)</a>
+            <a href="#way10">10. Game VPN</a>
         </div>
     </div>
 
@@ -434,7 +431,7 @@
         <div class="tip">💡 Попробуй бесплатные версии — если пинг снизится, проблема в маршруте провайдера.</div>
     </div>
 
-    <!-- БОНУС: Дополнительные советы -->
+    <!-- БОНУС -->
     <div class="card">
         <h2>🎁 Бонус: Дополнительные советы</h2>
         <ul class="list">
@@ -446,7 +443,7 @@
         </ul>
     </div>
 
-    <!-- Финальная проверка -->
+    <!-- Проверка результата -->
     <div class="card">
         <h2>📊 Как проверить результат?</h2>
         <div class="code-block">
@@ -476,96 +473,44 @@
 
 <script>
     // ========== ЗАЩИТА ОТ СКРИНШОТОВ ==========
-
     function showWarning() {
-        const el = document.getElementById('screenshotWarning');
+        var el = document.getElementById('screenshotWarning');
         if (el) {
             el.style.opacity = '1';
-            setTimeout(() => el.style.opacity = '0', 2000);
+            setTimeout(function() { el.style.opacity = '0'; }, 2000);
         }
         try { navigator.clipboard.writeText(''); } catch(e) {}
     }
 
-    // Блокировка всех комбинаций скриншотов
     window.addEventListener('keydown', function(e) {
         // Win + PrintScreen
-        if (e.metaKey && e.key === 'PrintScreen') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.metaKey && e.key === 'PrintScreen') { e.preventDefault(); showWarning(); return false; }
         // Win + Shift + S
-        if (e.metaKey && e.shiftKey && e.key === 'S') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.metaKey && e.shiftKey && e.key === 'S') { e.preventDefault(); showWarning(); return false; }
         // PrintScreen
-        if (e.key === 'PrintScreen') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.key === 'PrintScreen') { e.preventDefault(); showWarning(); return false; }
         // Alt + PrintScreen
-        if (e.altKey && e.key === 'PrintScreen') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
-        // Ctrl + PrintScreen
-        if (e.ctrlKey && e.key === 'PrintScreen') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
-        // F12 (DevTools)
-        if (e.key === 'F12') {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
-        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-        if (e.ctrlKey && e.shiftKey && ['I','J','C','i','j','c'].includes(e.key)) {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.altKey && e.key === 'PrintScreen') { e.preventDefault(); showWarning(); return false; }
+        // F12
+        if (e.key === 'F12') { e.preventDefault(); showWarning(); return false; }
+        // Ctrl+Shift+I/J/C
+        if (e.ctrlKey && e.shiftKey && ['I','J','C','i','j','c'].includes(e.key)) { e.preventDefault(); showWarning(); return false; }
         // Ctrl+U
-        if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); showWarning(); return false; }
         // Ctrl+P
-        if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if (e.ctrlKey && (e.key === 'P' || e.key === 'p')) { e.preventDefault(); showWarning(); return false; }
         // Ctrl+S
-        if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
-        // Win + G (игровая панель)
-        if (e.metaKey && (e.key === 'G' || e.key === 'g')) {
-            e.preventDefault();
-            showWarning();
-            return false;
-        }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) { e.preventDefault(); showWarning(); return false; }
+        // Win+G
+        if (e.metaKey && (e.key === 'G' || e.key === 'g')) { e.preventDefault(); showWarning(); return false; }
     });
 
-    // Блокировка контекстного меню
-    document.addEventListener('contextmenu', (e) => { e.preventDefault(); showWarning(); return false; });
-    // Блокировка копирования
-    document.addEventListener('copy', (e) => { e.preventDefault(); showWarning(); return false; });
-    document.addEventListener('cut', (e) => { e.preventDefault(); showWarning(); return false; });
-    // Блокировка выделения
-    document.addEventListener('selectstart', (e) => { e.preventDefault(); return false; });
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); showWarning(); return false; });
+    document.addEventListener('copy', function(e) { e.preventDefault(); showWarning(); return false; });
+    document.addEventListener('cut', function(e) { e.preventDefault(); showWarning(); return false; });
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
 
-    // Защита от iframe
-    if (window.top !== window.self) window.top.location = window.self.location;
+    if (window.top !== window.self) { window.top.location = window.self.location; }
 
     console.log('%c🔒 Гайд защищён от копирования и скриншотов', 'color: #0ff; font-size: 14px;');
 </script>

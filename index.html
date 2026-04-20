@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Автовыдача 24/7 | Гайд по снижению пинга</title>
+    <meta name="description" content="Полный гайд по снижению пинга в играх. Защищённый контент.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e1a 0%, #0c1120 100%);
+            font-family: 'Inter', sans-serif;
+            color: #eef2ff;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, rgba(0,255,255,0.03) 1px, transparent 1px, transparent 3px);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-badge {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .auto-badge {
+            background: rgba(0, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0ff;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #0f0;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #0f0;
+            animation: pulse 1.5s infinite;
+            margin-right: 6px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #0ff 60%, #00aaff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8a93b0;
+            margin-bottom: 2rem;
+            border-left: 3px solid #0ff;
+            padding-left: 1.2rem;
+        }
+
+        .card {
+            background: rgba(12, 18, 32, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0ff;
+            margin: 0.5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature {
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            border-left: 3px solid #0ff;
+        }
+
+        .feature strong {
+            color: #0ff;
+        }
+
+        .warning {
+            background: rgba(255, 80, 80, 0.1);
+            border-left: 4px solid #ff5555;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .list {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .list li {
+            margin: 0.6rem 0;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #0ff, transparent);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #5a6390;
+            margin-top: 3rem;
+        }
+
+        .screenshot-warning {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.85);
+            color: #ffaa00;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            z-index: 10001;
+            pointer-events: none;
+            font-family: monospace;
+            backdrop-filter: blur(12px);
+            border: 1px solid #ffaa00;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-weight: 600;
+        }
+
+        @media (max-width: 680px) {
+            h1 { font-size: 2rem; }
+            .price { font-size: 1.5rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-badge">
+            <div class="auto-badge">
+                <span class="live-dot"></span> АВТОВЫДАЧА 24/7
+            </div>
+            <div style="font-size: 0.85rem; color: #6c7a9e;">⚡ моментально после оплаты</div>
+        </div>
+
+        <h1>🕒 Снижение ПИНГА<br>Полный гайд</h1>
+        <div class="subtitle">
+            🚀 Оптимизация Windows, сети и реестра для идеального пинга в играх
+        </div>
+
+        <div class="price-box">
+            <div style="font-size: 1.2rem;">⭐️ ПОСЛЕ ОПЛАТЫ ВЫ ПОЛУЧИТЕ ⭐️</div>
+            <div class="price">📥 ПОДРОБНОЕ РУКОВОДСТВО</div>
+            <div style="margin: 1rem 0;">📖 ГАЙД + ВИЗУАЛЬНЫЕ ПОЯСНЕНИЯ</div>
+            <div style="margin-top: 0.8rem; font-size: 0.85rem; color: #0ff;">🕒 Автоматическая выдача 24/7</div>
+        </div>
+
+        <div class="card">
+            <h2><span>📦</span> Внутри руководства:</h2>
+            <div class="features-grid">
+                <div class="feature">🛠️ <strong>Комплексная оптимизация</strong><br>от провайдера до реестра</div>
+                <div class="feature">📉 <strong>Снижение ПИНГА</strong><br>стабилизация соединения</div>
+                <div class="feature">⚙️ <strong>Настройка Windows</strong><br>QoS, телеметрия, резервирование</div>
+                <div class="feature">💾 <strong>Leatrix Latency Fix</strong><br>и утилиты приоритета</div>
+                <div class="feature">📥 <strong>Драйверы сетевой карты</strong><br>правильное обновление</div>
+                <div class="feature">🖼️ <strong>Визуальные пояснения</strong><br>картинки к каждому шагу</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span>🤔</span> Почему выбирают нас:</h2>
+            <div class="features-grid">
+                <div class="feature">🛰️ <strong>АКТУАЛЬНЫЙ ТОВАР</strong></div>
+                <div class="feature">⏱️ <strong>ДОСТАВКА 24/7</strong><br>автовыдача</div>
+                <div class="feature">💰 <strong>ЛУЧШАЯ ЦЕНА</strong></div>
+                <div class="feature">🤝 <strong>УВАЖИТЕЛЬНОЕ ОБЩЕНИЕ</strong></div>
+                <div class="feature">🆘 <strong>ПОМОЩЬ ПРИ ПРОБЛЕМАХ</strong></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span>📖</span> Что вы получите:</h2>
+            <ul class="list">
+                <li>✅ Настройка параметров сетевой карты</li>
+                <li>✅ Скрипты и правки реестра</li>
+                <li>✅ Отключение телеметрии и обновлений Windows</li>
+                <li>✅ Настройка QoS и удаление резервирования</li>
+                <li>✅ Программы мониторинга пинга</li>
+                <li>✅ Рекомендации по DNS (Cloudflare, Google)</li>
+                <li>✅ Инструкция по Game VPN (ExitLag, WTFast)</li>
+            </ul>
+            <div class="warning">
+                ⚠️ <strong>ПЕРЕПРОДАЖА ЗАПРЕЩЕНА</strong> — только для личного использования
+            </div>
+        </div>
+
+        <hr>
+        <div class="footer">
+            🕒 <strong>АВТОВЫДАЧА 24/7</strong> — моментальная ссылка после оплаты<br>
+            💎 Поддержка в течение 12 часов
+        </div>
+    </div>
+
+    <div id="screenshotWarning" class="screenshot-warning">🔒 Win+PrintScreen и другие комбинации заблокированы</div>
+
+    <script>
+        // ========== ПОЛНАЯ БЛОКИРОВКА ВСЕХ ВАРИАНТОВ СКРИНШОТОВ ==========
+
+        function showScreenshotWarning() {
+            const warning = document.getElementById('screenshotWarning');
+            if (warning) {
+                warning.style.opacity = '1';
+                setTimeout(() => {
+                    warning.style.opacity = '0';
+                }, 2000);
+            }
+            if (navigator.vibrate) navigator.vibrate(200);
+            
+            // Очистка буфера обмена
+            try {
+                navigator.clipboard.writeText('').catch(() => {});
+            } catch(e) {}
+        }
+
+        window.addEventListener('keydown', function(e) {
+            // === ВАРИАНТЫ PRINTSCREEN ===
+            
+            // Win + PrintScreen (СОХРАНЯЕТ СКРИНШОТ В ПАПКУ!)
+            if (e.metaKey && e.key === 'PrintScreen') {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Win + Shift + S (Фрагмент экрана Windows 10/11)
+            if (e.metaKey && e.shiftKey && (e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl + PrintScreen
+            if (e.ctrlKey && e.key === 'PrintScreen') {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Alt + PrintScreen
+            if (e.altKey && e.key === 'PrintScreen') {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl + Alt + PrintScreen
+            if (e.ctrlKey && e.altKey && e.key === 'PrintScreen') {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Обычный PrintScreen
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+                e.stopPropagation();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // === ЗАПИСЬ ЭКРАНА ===
+            
+            // Win + G (игровая панель)
+            if (e.metaKey && (e.key === 'g' || e.key === 'G')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Win + Alt + R (запись экрана)
+            if (e.metaKey && e.altKey && (e.key === 'r' || e.key === 'R')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // === ИНСТРУМЕНТЫ РАЗРАБОТЧИКА ===
+            
+            if (e.key === 'F12') {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl+U (исходный код)
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl+P (печать)
+            if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+            
+            // Ctrl+S (сохранение)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                showScreenshotWarning();
+                return false;
+            }
+        });
+
+        // Блокировка контекстного меню
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showScreenshotWarning();
+            return false;
+        });
+
+        // Блокировка копирования
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showScreenshotWarning();
+            return false;
+        });
+
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            showScreenshotWarning();
+            return false;
+        });
+
+        // Блокировка выделения
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Защита от iframe
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+
+        // Очистка консоли
+        setInterval(() => console.clear(), 1000);
+        
+        console.log('%c🔒 Контент защищён. Win+PrintScreen и другие комбинации заблокированы.', 'color: #0ff; font-size: 14px;');
+    </script>
+</body>
+</html>
